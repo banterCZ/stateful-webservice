@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.zvestov.cz/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CounterWSService"
+                  targetNamespace="http://ws.zvestov.cz/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.zvestov.cz/" elementFormDefault="unqualified" targetNamespace="http://ws.zvestov.cz/" version="1.0">
+
+            <xs:element name="getCount" type="tns:getCount"/>
+
+            <xs:element name="getCountResponse" type="tns:getCountResponse"/>
+
+            <xs:element name="increase" type="tns:increase"/>
+
+            <xs:element name="increaseResponse" type="tns:increaseResponse"/>
+
+            <xs:complexType name="getCount">
+                <xs:sequence/>
+            </xs:complexType>
+
+            <xs:complexType name="getCountResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="increase">
+                <xs:sequence/>
+            </xs:complexType>
+
+            <xs:complexType name="increaseResponse">
+                <xs:sequence/>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="increaseResponse">
+        <wsdl:part element="tns:increaseResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCountResponse">
+        <wsdl:part element="tns:getCountResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="increase">
+        <wsdl:part element="tns:increase" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCount">
+        <wsdl:part element="tns:getCount" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+
+    <wsdl:portType name="CounterWS">
+        <wsdl:operation name="getCount">
+            <wsdl:input message="tns:getCount" name="getCount">
+            </wsdl:input>
+            <wsdl:output message="tns:getCountResponse" name="getCountResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="increase">
+            <wsdl:input message="tns:increase" name="increase">
+            </wsdl:input>
+            <wsdl:output message="tns:increaseResponse" name="increaseResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="CounterWSServiceSoapBinding" type="tns:CounterWS">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getCount">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getCount">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getCountResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="increase">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="increase">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="increaseResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="CounterWSService">
+        <wsdl:port binding="tns:CounterWSServiceSoapBinding" name="CounterWSPort">
+            <soap:address location="http://localhost:8080/statefull-webservice-1.0.0-SNAPSHOT/CounterWS"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
